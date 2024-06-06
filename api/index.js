@@ -1,19 +1,26 @@
+// api/index.js
+
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import authRoute from './routes/auth.route.js';
 
-
-mongoose.connect("process.env.MONGO").then(() => {
-    console.log("Connected to MongoDB");
-})
-.catch((err) => {
-    console.log(err);
-});
+dotenv.config();
 
 const app = express();
 
-app.listen(3000, () => {
-    console.log('Server is running in port 3000++');
-});
+mongoose.connect(process.env.MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+app.use(express.json());
 
 app.use('/api/auth', authRoute);
+
+app.listen(3000, () => {
+  console.log('Server is running in port 3000++');
+});
