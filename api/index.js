@@ -1,4 +1,7 @@
 import express from 'express';
+import mongoose from 'mongoose';
+
+mongoose.connect("mongodb+srv://aelishpatel112:Aelish9898@@mern-estate.zwowunr.mongodb.net/?retryWrites=true&w=majority&appName=mern-estate")
 
 const app= express();
 
